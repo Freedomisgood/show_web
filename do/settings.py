@@ -25,7 +25,7 @@ SECRET_KEY = '4%0x+d_**e^k5p_c76dmvs*nf55m%v8hz&+i#p-28mo-#vs5&h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
@@ -130,3 +130,6 @@ USE_TZ = False
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+STATIC_ROOT = "/home/nymrli/mvote/staticfiles/"

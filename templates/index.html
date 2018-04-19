@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}聊天日常{% endblock %}
+{% block content %}
+<div class='container'>
+{% for message in messages %}
+    <div class='alert alert-{{ message.tags }}'>{{ message }}</div>
+{% endfor %}
+<div class='row'>
+    <div class='col-md-12'>
+        <div class='panel panel-default'>
+            <div class='panel-heading' align=center>
+            <h3>展板</h3>
+            </div>
+        </div>
+            {% for msg in msgs %}
+                {% cycle "<div class='row'>" ""  ""  %}
+                    <div class="col-md-4">
+                    <div class="panel panel-primary">
+                    <div class="panel-heading" align="center">
+                        {{ msg.name }}-{{msg.}}
+                    </div>
+
+                        <div class="panel-body">
+                            <p>{{ msg.text }}</p>
+                        </div>
+
+                    <div class="panel-footer" align="right">
+                        <em class="date">{{ msg.ddate }}</em>
+                    </div>
+
+                        </div>
+                    </div>
+                {% cycle "" "" "</div>" %}
+                {% empty %}
+            <h4 align="center">Empty</h4>
+                {% endfor %}
+                </div>
+
+<script>
+        var minute = 1 * 60;
+        var hour = minute * 60;
+        var day = hour * 24;
+        var halfamonth = day * 15;
+        var month = day * 30;
+        window.onload = function(){
+            var arrs = document.getElementsByClassName("date");
+            for(var i=0;i<arrs.length;i++)
+            {
+                var ddate =  new Number(arrs[i].innerHTML);
+                arrs[i].innerHTML = getDateDiff(ddate);
+            }
+        }
+            function getDateDiff(diffValue){
+            var monthC =diffValue/month;
+            var weekC =diffValue/(7*day);
+            var dayC =diffValue/day;
+            var hourC =diffValue/hour;
+            var minC =diffValue/minute;
+            if(monthC>=1){
+             result="发表于" + parseInt(monthC) + "个月前";
+             }
+             else if(weekC>=1){
+             result="发表于" + parseInt(weekC) + "周前";
+             }
+             else if(dayC>=1){
+             result="发表于"+ parseInt(dayC) +"天前";
+             }
+             else if(hourC>=1){
+             result="发表于"+ parseInt(hourC) +"个小时前";
+             }
+             else if(minC>=1){
+             result="发表于"+ parseInt(minC) +"分钟前";
+             }else
+             {result="刚刚发表";}
+            return result;
+        }
+
+        </script>
+{% endblock %}

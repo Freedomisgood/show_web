@@ -1,0 +1,53 @@
+<!-- index.html (ch08www project) -->
+{% extends "base.html" %}
+{% block title %}恩爱日常{% endblock %}
+{% block content %}
+<div class='container'>
+{% for messtext in messtexts %}
+    <div class='alert alert-{{ messtext.tags }}'>{{ messtext }}</div>
+{% endfor %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading" align="center">
+                <h3>留下你的想法</h3>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">   
+ window.onload = function(){   
+    if (window.sessionStorage) {   
+        var id_name = window.sessionStorage.getItem("id_name");   
+        var id_text = window.sessionStorage.getItem("id_text");   
+        if (id_name != "" || id_name != null){   
+            document.getElementById("id_name").value = id_name;   
+        }   
+        if (id_text != "" || id_text != null){   
+            document.getElementById("id_text").value = id_text;   
+        }   
+    }
+ };   
+
+function saveToStorage() {    
+    if (window.sessionStorage) {   
+        var id_name = document.getElementById("id_name").value;   
+        var id_text = document.getElementById("id_text").value;   
+        window.sessionStorage.setItem("id_name", id_name);   
+        window.sessionStorage.setItem("id_text", id_text);   
+    }
+ }   
+ </script>   
+  
+
+<form action="." method="POST">
+    {% csrf_token %}
+    <table>
+        {{ msg.as_table }}
+    </table>
+    <Br>
+    <em>----------------------</em><input type="submit" value="发布" onclick="saveToStorage()"><br>
+</form>
+</div>
+
+{% endblock %}

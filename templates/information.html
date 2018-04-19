@@ -1,0 +1,25 @@
+<!-- index.html (ch08www project) -->
+{% extends "base.html" %}
+{% block title %}恩爱日常{% endblock %}
+{% block content %}
+<div class='container'>
+{% for message in messages %}
+    <div class='alert alert-{{ message.tags }}'>{{ message }}</div>
+{% endfor %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading" align="center">
+                <h3>个人资料</h3>
+            </div>
+        </div>
+    </div>
+<form action="." method="POST">
+    {% csrf_token %}
+    <table>
+        {{ info_form.as_table }}
+    </table>
+    <input type="submit" value="修改"><br>
+</form>
+</div>
+{% endblock %}
